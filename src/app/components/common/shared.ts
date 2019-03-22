@@ -1,12 +1,30 @@
-import {NgModule,EventEmitter,Directive,ViewContainerRef,Input,Output,ContentChildren,ContentChild,TemplateRef,OnInit,OnChanges,OnDestroy,AfterContentInit,QueryList,SimpleChanges,EmbeddedViewRef} from '@angular/core';
+import {
+    AfterContentInit,
+    Component,
+    ContentChild,
+    ContentChildren,
+    Directive,
+    EventEmitter,
+    Input,
+    NgModule,
+    Output,
+    QueryList,
+    TemplateRef
+} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {Component} from '@angular/core';
 
 @Component({
     selector: 'p-header',
     template: '<ng-content></ng-content>'
 })
 export class Header {}
+
+@Component({
+    selector: 'p-content',
+    template: '<ng-content></ng-content>'
+})
+export class Content {
+}
 
 @Component({
     selector: 'p-footer',

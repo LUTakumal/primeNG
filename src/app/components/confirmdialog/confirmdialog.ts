@@ -1,12 +1,12 @@
-import {NgModule,Component,ElementRef,OnDestroy,Input,EventEmitter,Renderer2,ContentChild,NgZone,ViewChild} from '@angular/core';
-import {trigger,state,style,transition,animate,AnimationEvent} from '@angular/animations';
+import {Component, ContentChild, ElementRef, EventEmitter, Input, NgModule, NgZone, OnDestroy, Renderer2, ViewChild} from '@angular/core';
+import {animate, AnimationEvent, state, style, transition, trigger} from '@angular/animations';
 import {CommonModule} from '@angular/common';
 import {DomHandler} from '../dom/domhandler';
-import {Footer,SharedModule} from '../common/shared';
+import {Content, Footer, Header, SharedModule} from '../common/shared';
 import {ButtonModule} from '../button/button';
 import {Confirmation} from '../common/confirmation';
 import {ConfirmationService} from '../common/confirmationservice';
-import {Subscription}   from 'rxjs';
+import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'p-confirmDialog',
@@ -14,14 +14,18 @@ import {Subscription}   from 'rxjs';
         <div [ngClass]="{'ui-dialog ui-confirmdialog ui-widget ui-widget-content ui-corner-all ui-shadow':true,'ui-dialog-rtl':rtl}" [ngStyle]="style" [class]="styleClass" (mousedown)="moveOnTop()"
             [@animation]="{value: 'visible', params: {transitionParams: transitionOptions}}" (@animation.start)="onAnimationStart($event)" *ngIf="visible">
             <div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top">
-                <span class="ui-dialog-title" *ngIf="header">{{header}}</span>
+                <ng-content select="p-header"></ng-content>
+                <span class="ui-dialog-title" *ngIf="header && !customHeader">{{header}}</span>
                 <a *ngIf="closable" [ngClass]="{'ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all':true}" tabindex="0" role="button" (click)="close($event)" (keydown.enter)="close($event)">
                     <span class="pi pi-fw pi-times"></span>
                 </a>
             </div>
-            <div #content class="ui-dialog-content ui-widget-content">
+            <div #content class="ui-dialog-content ui-widget-content" *ngIf="!customContent">
                 <i [ngClass]="'ui-confirmdialog-icon'" [class]="icon" *ngIf="icon"></i>
                 <span class="ui-confirmdialog-message" [innerHTML]="message"></span>
+            </div>
+            <div #content class="ui-dialog-content ui-widget-content" *ngIf="customContent">
+                <ng-content select="p-content"></ng-content>
             </div>
             <div class="ui-dialog-footer ui-widget-content" *ngIf="footer">
                 <ng-content select="p-footer"></ng-content>
@@ -96,6 +100,8 @@ export class ConfirmDialog implements OnDestroy {
     @Input() transitionOptions: string = '400ms cubic-bezier(0.25, 0.8, 0.25, 1)';
 
     @ContentChild(Footer) footer;
+    @ContentChild(Header) customHeader;
+    @ContentChild(Content) customContent;
 
     @ViewChild('content') contentViewChild: ElementRef;
     

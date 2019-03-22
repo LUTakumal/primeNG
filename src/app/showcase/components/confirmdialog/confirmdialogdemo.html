@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<div class="content-section implementation">    
+<div class="content-section implementation">
     <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
 
     <button type="button" (click)="confirm1()" pButton icon="pi pi-check" label="Confirm"></button>
@@ -162,6 +162,12 @@ export class ConfirmDialogDemo &#123;
 <pre>
 <code class="language-markup" pCode ngNonBindable>
 &lt;p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle"&gt;
+    &lt;p-header&gt;
+            &lt;span class="header-style"&gt;Confirm Please&lt;/span&gt;
+    &lt;/p-header&gt;
+    &lt;p-content&gt;
+            &lt;span class="content-style"&gt;Your custom message &lt;/span&gt;
+    &lt;/p-content&gt;
     &lt;p-footer&gt;
         &lt;button type="button" pButton icon="pi pi-times" label="No" (click)="cd.reject()"&gt;&lt;/button&gt;
         &lt;button type="button" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"&gt;&lt;/button&gt;
