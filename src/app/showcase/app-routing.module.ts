@@ -86,6 +86,7 @@ import { HomeComponent } from './components/home/home.component';
             {path: 'tabmenu', loadChildren: './components/tabmenu/tabmenudemo.module#TabMenuDemoModule'},
             {path: 'tabview', loadChildren: './components/tabview/tabviewdemo.module#TabViewDemoModule'},
             {path: 'terminal', loadChildren: './components/terminal/terminaldemo.module#TerminalDemoModule'},
+            {path: 'timecounter', loadChildren: './components/timecounter/timecounterdemo.module#TimecounterdemoModule'},
             {path: 'tieredmenu', loadChildren: './components/tieredmenu/tieredmenudemo.module#TieredMenuDemoModule'},
             {path: 'toast', loadChildren: './components/toast/toastdemo.module#ToastDemoModule'},
             {path: 'togglebutton', loadChildren: './components/togglebutton/togglebuttondemo.module#ToggleButtonDemoModule'},
