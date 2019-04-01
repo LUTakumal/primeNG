@@ -1,7 +1,6 @@
 import {NgModule,Component,Input} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MenuItem} from '../common/menuitem';
-import {Location} from '@angular/common';
 import {RouterModule} from '@angular/router';
 
 @Component({
@@ -30,7 +29,7 @@ import {RouterModule} from '@angular/router';
                         <a *ngIf="item.routerLink" [routerLink]="item.routerLink" [queryParams]="item.queryParams" [routerLinkActive]="'ui-state-active'" [routerLinkActiveOptions]="item.routerLinkActiveOptions||{exact:false}" class="ui-menuitem-link" (click)="itemClick($event, item)" 
                             [ngClass]="{'ui-state-disabled':item.disabled}" [attr.target]="item.target" [attr.title]="item.title" [attr.id]="item.id">
                             <span *ngIf="item.icon" class="ui-menuitem-icon" [ngClass]="item.icon"></span>
-                            <span class="ui-menuitem-text">{{item.label}}</span>
+                            <span class="ui-menuitem-text" [ngClass]="item.styleClass">{{item.label}}</span>
                         </a>
                     </li>
                     <li class="ui-breadcrumb-chevron pi pi-chevron-right" *ngIf="!end"></li>

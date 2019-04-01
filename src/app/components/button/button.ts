@@ -118,7 +118,7 @@ export class ButtonDirective implements AfterViewInit, OnDestroy {
                         'ui-button-text-only': (!icon && label),
                         'ui-button-text-empty': (!icon && !label),
                         'ui-state-disabled': disabled}"
-                        (click)="onClick.emit($event)" (focus)="onFocus.emit($event)" (blur)="onBlur.emit($event)">
+                        (click)="onClickEvent($event)" (focus)="onFocus.emit($event)" (blur)="onBlur.emit($event)">
             <ng-content></ng-content>
             <span [ngClass]="{'ui-clickable': true,
                         'ui-button-icon-left': (iconPos === 'left'), 
@@ -144,11 +144,26 @@ export class Button {
 
     @Input() styleClass: string;
 
+    @Input() isLoadingButton: boolean;
+
     @Output() onClick: EventEmitter<any> = new EventEmitter();
 
     @Output() onFocus: EventEmitter<any> = new EventEmitter();
 
     @Output() onBlur: EventEmitter<any> = new EventEmitter();
+
+    onClickEvent(event){
+        let originalIcon = this.icon;
+        if(this.isLoadingButton) {
+            this.icon = "pi pi-spin pi-spinner";
+            this.disabled = true;
+            setTimeout(() => {
+                this.icon = originalIcon;
+                this.disabled = false;
+            }, 1000);
+        }
+        this.onClick.emit(event);
+    }
 }
 
 @NgModule({
